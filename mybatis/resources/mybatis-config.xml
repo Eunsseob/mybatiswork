@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- setting : mybatis 구동시 선언할 설정들을 작성하는 여역 -->
+<!-- 만약 null로 데이터가 전달되었다면 빈칸이 아닌 null로 인식하도록 설정 -->
+<settings>
+	<setting name="jdbcTypeForNull" value="NULL"/>
+</settings>
+<!--  typeAlias : servlet, bean클래스들의 풀 클래스명을 단순한 클래스명으로  -->
+<!--  mybatis에서 연동할 DB정보들을 등록하는 영역 -->
+  <environments default="development">
+    <environment id="development">
+    <!-- JDBC : 트랜잭션을 내가 직접 관리함(수동 commit) -->
+      <transactionManager type="JDBC"/>
+      <!-- 
+      	* dataSource type
+      		POOLED : ConnectionPool을 사용함
+      		UNPOOLED : ConnectionPool을 사용하지 않음
+       -->
+      <dataSource type="POOLED">
+        <property name="driver" value="oracle.jdbc.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@//localhost:1521/free"/>
+        <property name="username" value="mybatis"/>
+        <property name="password" value="1234"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="/mappers/member-mapper.xml"/>
+  </mappers>
+</configuration>
