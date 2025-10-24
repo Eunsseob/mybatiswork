@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.mybatis.member.dto.member;
+import com.mybatis.member.dto.Member;
 import com.mybatis.member.service.MemberServiceImpl;
 
 /**
@@ -21,11 +21,11 @@ public class MemberInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		member m = new member();
+		Member m = new Member();
 		
-		m.setUser_id(request.getParameter("userId"));
-		m.setUser_pwd(request.getParameter("userPwd"));
-		m.setUser_name(request.getParameter("userName"));
+		m.setUserId(request.getParameter("userId"));
+		m.setUserPwd(request.getParameter("userPwd"));
+		m.setUserName(request.getParameter("userName"));
 		m.setEmail(request.getParameter("email"));
 		m.setBirthday(request.getParameter("birthday"));
 		m.setGender(request.getParameter("gender"));
@@ -35,7 +35,9 @@ public class MemberInsertServlet extends HttpServlet {
 		int result = new MemberServiceImpl().insertMember(m);
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath());
+			request.setAttribute("errorMsg", "회원가입 실패");
+			request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp")
+				   .forward(request, response);
 		}
 	}
 

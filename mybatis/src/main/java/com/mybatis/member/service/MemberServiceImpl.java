@@ -3,11 +3,10 @@ package com.mybatis.member.service;
 import org.apache.ibatis.session.SqlSession;
 
 import com.mybatis.common.template.Template;
-import com.mybatis.member.dto.member;
+import com.mybatis.member.dto.Member;
 import com.mybatis.member.repository.MemberRepository;
 
 public class MemberServiceImpl implements MemberService {
-
 	private MemberRepository mDao = new MemberRepository();
 	private SqlSession sqlSession = Template.getSqlSession();
 	
@@ -17,25 +16,26 @@ public class MemberServiceImpl implements MemberService {
 		sqlSession.close();
 		return checkId;
 	}
-
+	
 	@Override
-	public int insertMember(member m) {
+	public int insertMember(Member m) {
 		int result = mDao.insertMember(sqlSession, m);
 		if(result > 0) {
 			sqlSession.commit();
-		} 
+		}
 		sqlSession.close();
 		return result;
 	}
-	
+
 	@Override
-	public member loginMember(member m) {
-		// TODO Auto-generated method stub
-		return null;
+	public Member loginMember(Member m) {
+		Member loginUser = mDao.loginMember(sqlSession, m);
+		sqlSession.close();
+		return loginUser;
 	}
 
 	@Override
-	public int updateMember(member m) {
+	public int updateMember(Member m) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -45,5 +45,7 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }

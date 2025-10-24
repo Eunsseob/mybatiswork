@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Enroll Form</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<title>Enroll Form</title>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -18,17 +18,17 @@
 				<tr>
 					<td>* ID</td>
 					<td>
-						<input type="text" name="userId" id="userId" required autocomplete="current-password">
+						<input type="text" name="userId" id="userId" required>
 						<div id="checkResult" style="font-size:0.8em; display:none"></div>
 					</td>
 				</tr>
 				<tr>
 					<td>* PWD</td>
-					<td><input type="password" name="userPwd" required autocomplete="current-password"></td>
+					<td><input type="password" name="userPwd" required></td>
 				</tr>
 				<tr>
 					<td>* NAME</td>
-					<td><input type="text" name="userName" required autocomplete="current-userName"></td>
+					<td><input type="text" name="userName" required></td>
 				</tr>
 				<tr>
 					<td>&ensp; EMAIL</td>
@@ -67,31 +67,38 @@
 		const $idInput = $("#userId");
 		$idInput.keyup(function() {
 			console.log($idInput.val());
-			if($idInput.val().length >= 5){
+			if($idInput.val().length >= 5) {
 				$.ajax({
 					url: "idCheck.me",
 					data: {checkId: $idInput.val()},
 					success:function(result){
-						if(result == "아이디 사용 불가능"){
+						if(result == "idN") {
 							$("#checkResult").show();
 							$("#checkResult").css("color", "red")
-											.text("중복된 아이디가 존재합니다. 다시 입력해 주세요.");
+											 .text("중복된 아이디가 존재합니다. 다시 입력해 주세요");
 							$("#enrollForm :submit").attr("disabled", true);
 						} else {
 							$("#checkResult").show();
 							$("#checkResult").css("color", "green")
-											.text("아이디 사용가능합니다!");
+											 .text("멋진 아이디네요");
 							$("#enrollForm :submit").attr("disabled", false);
 						}
 					},
-					error:function(){
+					error:function() {
 						console.log("아이디 체크용 ajax통신 실패");
 					}
 				})
+			} else {
+				$("#checkResult").hide();
+				$("#enrollForm :submit").attr("disabled", true);
 			}
-		}
-	)
+		})
 	</script>
-	
 </body>
 </html>
+
+
+
+
+
+

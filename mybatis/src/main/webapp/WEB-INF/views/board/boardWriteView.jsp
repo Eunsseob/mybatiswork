@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="common/menubar.jsp"/>
-	<img src="../resource/img/짱구1.jpg"/>
+	<h1>보드 글쓰기가 갈자리입니다.</h1>
 </body>
 </html>
