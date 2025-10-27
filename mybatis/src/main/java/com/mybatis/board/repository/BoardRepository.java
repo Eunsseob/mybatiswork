@@ -65,8 +65,11 @@ public class BoardRepository {
 	}
 
 	public int insertReply(SqlSession sqlSession, Reply r) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("boardMapper.insertReply", r);
+	}
+
+	public int insertBoard(SqlSession sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 
 }

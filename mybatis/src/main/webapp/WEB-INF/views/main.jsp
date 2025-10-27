@@ -5,9 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	img {
+		width: 50%;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="common/menubar.jsp"/>
-	<img src="../resource/img/짱구1.jpg"/>
+	<br>
+	<img src="${pageContext.request.contextPath}/resource/img/짱구1.jpg">
 </body>
 </html>

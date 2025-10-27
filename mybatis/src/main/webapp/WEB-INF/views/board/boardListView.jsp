@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 	#list-area table {
 		border:1px solid;
@@ -67,12 +68,15 @@
 		</div>
 		<br>
 		
-		<div align="right" style="width:500px;">
-			<form action="boardInsert.bo">
-				<input type="submit" value="글쓰기">
-			</form>
-		</div>
+		<c:if test="${loginUser != null}">
+			<div align="center">
+				<form action="boardInsertForm.bo">
+					<input type="submit" value="글쓰기">
+				</form>
+			</div>
+		</c:if>
 		
+		<br>
 		<div id="paging-area" align="center">
 			<c:if test="${pi.nowPage ne 1}">
 				<c:choose>
